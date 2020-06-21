@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TextAdventure.GameStateStuff
 {
@@ -6,7 +7,7 @@ namespace TextAdventure.GameStateStuff
 	{
 		public static GameState Provide()
 		{
-			return new GameState
+			var gameState = new GameState
 			{
 				CurrentLocation = new Location
 				{
@@ -43,7 +44,21 @@ namespace TextAdventure.GameStateStuff
 									{
 										new KeyValuePair<string, string>("always-true", "You win! Type \"exitgame\" to quit.")
 									}
-								)
+								),
+								Connections = new List<Connection>
+								{
+									new Connection
+									{
+										Name = "Easy-to-open Door",
+										ConditionalDescription = new ConditionalDescription(
+											new List<KeyValuePair<string, string>>
+											{
+												new KeyValuePair<string, string>("always-true", "It looks easy to open.")
+											}
+										),
+										CharacteristicForEntry = "always-true"
+									}
+								}
 							},
 							CharacteristicForEntry = "owns-item Old Key"
 						}
@@ -60,6 +75,8 @@ namespace TextAdventure.GameStateStuff
 					ExtraCharacteristics = new List<string> { "always-true" }
 				}
 			};
+			//gameState.CurrentLocation.Connections.First().Destination.Connections.First().Destination = gameState.CurrentLocation;
+			return gameState;
 		}
 	}
 }
