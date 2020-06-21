@@ -8,14 +8,14 @@ namespace TextAdventure.Extensions
 	{
 		// copied from https://github.com/djkrose/7DTD-ScriptingMod/blob/master/ScriptingMod/Extensions/StringExtensions.cs
 		// Removes the indentation of the first non-empty line from all the lines,
-        // effectively keeping relative indentation but removing common indentation.
+ 		// effectively keeping relative indentation but removing common indentation.
 		// Also empty lines at start and end are removed.
 		public static string Unindent(this string source)
 		{
-            IEnumerable<string> lines = source.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            lines = TrimEmptyLines(lines);
-            string indent = new string((lines.FirstOrDefault() ?? "").TakeWhile(char.IsWhiteSpace).ToArray());
-            lines = lines.Select(l => l.StartsWith(indent) ? l.Substring(indent.Length) : l.TrimStart(' '));
+			IEnumerable<string> lines = source.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+			lines = TrimEmptyLines(lines);
+			string indent = new string((lines.FirstOrDefault() ?? "").TakeWhile(char.IsWhiteSpace).ToArray());
+			lines = lines.Select(l => l.StartsWith(indent) ? l.Substring(indent.Length) : l.TrimStart(' '));
 			return string.Join(Environment.NewLine, lines.ToArray());
 		}
 

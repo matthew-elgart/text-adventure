@@ -27,6 +27,7 @@ namespace TextAdventure
 		- tests
 		- loading
 		- saving
+		- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO
 		*/
 		static void Main(string[] args)
 		{
@@ -35,7 +36,7 @@ namespace TextAdventure
 			Console.WriteLine("Welcome to the game. Type \"help\" for a list of available commands. Type \"exitgame\" to quit.");
 
 			// TODO: read from file
-			var gameState = OtherHardCodedExample.Provide();
+			var gameState = HardCodedGameStateProvider.Provide();
 			Console.WriteLine();
 			Console.WriteLine(gameState.CurrentLevel.GetFullLevelDescription(gameState.Protagonist));
 
@@ -46,7 +47,7 @@ namespace TextAdventure
 
 				var command = InputParser.ParseInput(input);
 				var stringToPrint = command.ExecuteCommand(gameState);
-				Console.WriteLine($"{stringToPrint}");
+				Console.WriteLine(stringToPrint);
 			}
 		}
 
