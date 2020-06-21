@@ -20,7 +20,7 @@ namespace TextAdventure
 			switch (command)
 			{
 				case "location":
-					return new LevelDescriptionCommand();
+					return new LocationDescriptionCommand();
 				case "inventory":
 					return new ListItemsCommand();
 				case "take":

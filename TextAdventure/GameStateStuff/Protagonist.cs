@@ -8,7 +8,7 @@ namespace TextAdventure.GameStateStuff
 		public IList<Item> Items { get; set; } = new List<Item>();
 		public IList<Item> ItemsInspected { get; set; } = new List<Item>();
 		public IList<Connection> ConnectionsInspected { get; set; } = new List<Connection>();
-		public IList<Level> LocationsVisited { get; set; } = new List<Level>();
+		public IList<Location> LocationsVisited { get; set; } = new List<Location>();
 		public IList<string> ExtraCharacteristics { get; set; } = new List<string>();
 
 		public IEnumerable<string> GetCharacteristics()

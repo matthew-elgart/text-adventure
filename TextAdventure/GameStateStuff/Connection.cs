@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Specialized;
 using System.Linq;
 
 namespace TextAdventure.GameStateStuff
@@ -8,7 +7,7 @@ namespace TextAdventure.GameStateStuff
 	{
 		public string Name { get; set; }
 		public ConditionalDescription ConditionalDescription { get; set; }
-		public Level Destination { get; set; }
+		public Location Destination { get; set; }
 		public string CharacteristicForEntry { get; set; }
 
 		public string GetDescription(Protagonist protagonist)

@@ -20,16 +20,18 @@ namespace TextAdventure.Commands
 				return "You need to specify what to inspect.";
 			}
 
-			var currentLevel = gameState.CurrentLevel;
-			var item = currentLevel.Items
+			var currentLocation = gameState.CurrentLocation;
+			var item = currentLocation.Items
 				.SingleOrDefault(i => i.Name.Equals(this._objectToInspect, StringComparison.OrdinalIgnoreCase));
-			if (item != null){
+			if (item != null)
+			{
 				return item.GetDescription(gameState.Protagonist);
 			}
-			
-			var connection = currentLevel.Connections
+
+			var connection = currentLocation.Connections
 				.SingleOrDefault(c => c.Name.Equals(this._objectToInspect, StringComparison.OrdinalIgnoreCase));
-			if (connection != null){
+			if (connection != null)
+			{
 				return connection.GetDescription(gameState.Protagonist);
 			}
 

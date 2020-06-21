@@ -18,16 +18,16 @@ namespace TextAdventure.Commands
 				return "You need to specify what to take.";
 			}
 
-			var currentLevel = gameState.CurrentLevel;
-			var itemInLevel = currentLevel.Items
+			var currentLocation = gameState.CurrentLocation;
+			var itemInLocation = currentLocation.Items
 				.SingleOrDefault(i => i.Name.Equals(this._itemToTake, StringComparison.OrdinalIgnoreCase));
-			if (itemInLevel == null) {
+			if (itemInLocation == null) {
 				return $"There is no [{this._itemToTake}] to take here.";
 			}
 
-			currentLevel.Items.Remove(itemInLevel);
-			gameState.Protagonist.Items.Add(itemInLevel);
-			return $"Took the [{itemInLevel.Name}].";
+			currentLocation.Items.Remove(itemInLocation);
+			gameState.Protagonist.Items.Add(itemInLocation);
+			return $"Took the [{itemInLocation.Name}].";
 		}
 	}
 }

@@ -19,12 +19,12 @@ namespace TextAdventure.Commands
 				return "You need to specify where to go.";
 			}
 
-			var connection = gameState.CurrentLevel.Connections
+			var connection = gameState.CurrentLocation.Connections
 				.SingleOrDefault(c => c.Name.Equals(this._connectionToEnter, StringComparison.OrdinalIgnoreCase));
 			if (connection != null && connection.IsEnterable(gameState.Protagonist))
 			{
-				gameState.CurrentLevel = connection.Destination;
-				return connection.Destination.GetFullLevelDescription(gameState.Protagonist);
+				gameState.CurrentLocation = connection.Destination;
+				return connection.Destination.GetFullLocationDescription(gameState.Protagonist);
 			}
 
 			return $"Can't go there.";

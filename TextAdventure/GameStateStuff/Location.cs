@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TextAdventure.GameStateStuff
 {
-	public class Level
+	public class Location
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -11,7 +11,7 @@ namespace TextAdventure.GameStateStuff
 		public IList<Item> Items { get; set; } = new List<Item>();
 		public IEnumerable<Connection> Connections { get; set; } = new List<Connection>();
 
-		public string GetFullLevelDescription(Protagonist protagonist)
+		public string GetFullLocationDescription(Protagonist protagonist)
 		{
 			var levelDescription = this.GetDescription(protagonist);
 			var itemNames = this.Items.Select(i => $"There is a [{i.Name}] here.");

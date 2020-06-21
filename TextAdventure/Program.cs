@@ -21,6 +21,7 @@ namespace TextAdventure
 			* protagonist has GetCharacteristics() method (name tbd) that combines all into enumerable of strings
 			* connections being enterable
 			- items being takeable
+		- change level to location
 		- "Can't take that" or "No X to take here"?
 		- Consider abstract class for thing with conditional description
 		- extract stuff from Program.cs into a GamePlayer or something
@@ -38,7 +39,7 @@ namespace TextAdventure
 			// TODO: read from file
 			var gameState = HardCodedGameStateProvider.Provide();
 			Console.WriteLine();
-			Console.WriteLine(gameState.CurrentLevel.GetFullLevelDescription(gameState.Protagonist));
+			Console.WriteLine(gameState.CurrentLocation.GetFullLocationDescription(gameState.Protagonist));
 
 			while (!gameState.GameIsOver)
 			{

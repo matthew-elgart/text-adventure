@@ -8,7 +8,7 @@ namespace TextAdventure.GameStateStuff
 		{
 			return new GameState
 			{
-				CurrentLevel = new Level
+				CurrentLocation = new Location
 				{
 					Items = new List<Item>
 					{
@@ -36,7 +36,7 @@ namespace TextAdventure.GameStateStuff
 									new KeyValuePair<string, string>("always-true", "A large, heavy iron door. It's shut and won't budge.")
 								}
 							),
-							Destination = new Level
+							Destination = new Location
 							{
 								ConditionalDescription = new ConditionalDescription(
 									new List<KeyValuePair<string, string>>

@@ -1,13 +1,12 @@
-using System.Linq;
 using TextAdventure.GameStateStuff;
 
 namespace TextAdventure.Commands
 {
-	public class LevelDescriptionCommand : ICommand
+	public class LocationDescriptionCommand : ICommand
 	{
 		public string ExecuteCommand(GameState gameState)
 		{
-			return gameState.CurrentLevel.GetFullLevelDescription(gameState.Protagonist);
+			return gameState.CurrentLocation.GetFullLocationDescription(gameState.Protagonist);
 		}
 	}
 }
