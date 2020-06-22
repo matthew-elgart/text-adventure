@@ -31,6 +31,8 @@ namespace TextAdventure
 					return new CheckCommand(parameter);
 				case "enter":
 					return new EnterCommand(parameter);
+				case "save":
+					return new SaveCommand(parameter);
 				case "help":
 					return new HelpCommand();
 				case "exitgame":

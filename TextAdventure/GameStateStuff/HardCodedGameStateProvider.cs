@@ -39,6 +39,7 @@ namespace TextAdventure.GameStateStuff
 							),
 							Destination = new Location
 							{
+								Name = "End room",
 								ConditionalDescription = new ConditionalDescription(
 									new List<KeyValuePair<string, string>>
 									{
@@ -75,7 +76,7 @@ namespace TextAdventure.GameStateStuff
 					ExtraCharacteristics = new List<string> { "always-true" }
 				}
 			};
-			//gameState.CurrentLocation.Connections.First().Destination.Connections.First().Destination = gameState.CurrentLocation;
+			gameState.CurrentLocation.Connections.First().Destination.Connections.First().Destination = gameState.CurrentLocation;
 			return gameState;
 		}
 	}

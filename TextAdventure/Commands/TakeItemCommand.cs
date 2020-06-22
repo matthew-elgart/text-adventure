@@ -7,10 +7,12 @@ namespace TextAdventure.Commands
 	public class TakeItemCommand : ICommand
 	{
 		private readonly string _itemToTake;
+
 		public TakeItemCommand(string itemToTake)
 		{
 			this._itemToTake = itemToTake;
 		}
+
 		public string ExecuteCommand(GameState gameState)
 		{
 			if (this._itemToTake == null)

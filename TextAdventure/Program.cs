@@ -21,13 +21,23 @@ namespace TextAdventure
 			* protagonist has GetCharacteristics() method (name tbd) that combines all into enumerable of strings
 			* connections being enterable
 			- items being takeable
-		- change level to location
+		* change level to location
+		- reduce nesting on conditional/possible descriptions
 		- "Can't take that" or "No X to take here"?
 		- Consider abstract class for thing with conditional description
 		- extract stuff from Program.cs into a GamePlayer or something
-		- tests
+		* implement saving
+			* custom converter for destination of connection
+			* saver
+				* graph traversal to get all the locations
+				* order the locations (by name? ID?)
+				* write the string to a file
+			* implement save command
+				* investigate y/n confirmation on commands
 		- loading
-		- saving
+		- make updates to things like ItemsInspected in relevant commands
+		- tests
+		- consider IDs instead of names
 		- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO
 		*/
 		static void Main(string[] args)
