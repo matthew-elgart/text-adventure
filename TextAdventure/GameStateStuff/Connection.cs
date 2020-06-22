@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using Newtonsoft.Json;
-using TextAdventure.GameStateStuff.Serialization;
 
 namespace TextAdventure.GameStateStuff
 {
@@ -9,7 +7,6 @@ namespace TextAdventure.GameStateStuff
 	{
 		public string Name { get; set; }
 		public ConditionalDescription ConditionalDescription { get; set; }
-		[JsonConverter(typeof(DestinationConverter))]
 		public Location Destination { get; set; }
 		public string CharacteristicForEntry { get; set; }
 

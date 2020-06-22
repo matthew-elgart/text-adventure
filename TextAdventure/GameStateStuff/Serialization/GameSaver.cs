@@ -11,16 +11,8 @@ namespace TextAdventure.GameStateStuff.Serialization
 
 		public static bool SaveGameState(GameState gameState, string fileName)
 		{
-			var allLocations = GameSaver.TraverseAllLocations(gameState.CurrentLocation);
-			var sortedLocations = allLocations.OrderBy(l => l.Name);
-			var serializableGameState = new SerializableGameState
-			{
-				Locations = sortedLocations,
-				CurrentLocationName = gameState.CurrentLocation.Name,
-				Protagonist = gameState.Protagonist,
-				GameIsOver = gameState.GameIsOver
-			};
-			var jsonString = JsonConvert.SerializeObject(serializableGameState);
+			var serializableGameState = GameSaver.GetSerializableGameState(gameState);
+			var jsonString = JsonConvert.SerializeObject(serializableGameState, Formatting.Indented);
 
 			var saveFileDirectory = GameSaver.GetSaveFileDirectory();
 			Directory.CreateDirectory(saveFileDirectory);
@@ -30,6 +22,33 @@ namespace TextAdventure.GameStateStuff.Serialization
 
 			File.WriteAllText(saveFilePath, jsonString);
 			return fileExists;
+		}
+
+		public static SerializableGameState GetSerializableGameState(GameState gameState){
+			var allLocations = GameSaver.TraverseAllLocations(gameState.CurrentLocation);
+			var serializableLocations = allLocations
+				.Select(l => new SerializableLocation
+				{
+					Name = l.Name,
+					Description = l.Description,
+					ConditionalDescription = l.ConditionalDescription,
+					Items = l.Items,
+					Connections = l.Connections.Select(c => new SerializableConnection
+					{
+						Name = c.Name,
+						ConditionalDescription = c.ConditionalDescription,
+						Destination = c.Destination.Name,
+						CharacteristicForEntry = c.CharacteristicForEntry
+					})
+				});
+
+			return new SerializableGameState
+			{
+				Locations = serializableLocations.OrderBy(l => l.Name),
+				CurrentLocationName = gameState.CurrentLocation.Name,
+				Protagonist = gameState.Protagonist,
+				GameIsOver = gameState.GameIsOver
+			};
 		}
 
 		public static string GetSaveFileDirectory()

@@ -22,7 +22,7 @@ namespace TextAdventure
 			* connections being enterable
 			- items being takeable
 		* change level to location
-		- reduce nesting on conditional/possible descriptions
+		* reduce nesting on conditional/possible descriptions
 		- "Can't take that" or "No X to take here"?
 		- Consider abstract class for thing with conditional description
 		- extract stuff from Program.cs into a GamePlayer or something
@@ -35,6 +35,13 @@ namespace TextAdventure
 			* implement save command
 				* investigate y/n confirmation on commands
 		- loading
+			* make serializable locations, connections
+			* update transformation from gamestate to serializable gamestate
+			* use those to have saver serialize those directly with no custom converters
+			- implement transformation from serialized gamestate to regular gamestate
+				- first pass, create locations with null destinations in connections
+					- create dictionary of connection -> destinationName and name -> location
+				- second pass, use dictionaries to populate destinations
 		- make updates to things like ItemsInspected in relevant commands
 		- tests
 		- consider IDs instead of names
