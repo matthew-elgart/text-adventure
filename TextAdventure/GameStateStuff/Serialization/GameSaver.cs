@@ -7,30 +7,27 @@ namespace TextAdventure.GameStateStuff.Serialization
 {
 	public class GameSaver
 	{
-		public const string SaveFileExtension = ".json";
-
 		public static bool SaveGameState(GameState gameState, string fileName)
 		{
 			var serializableGameState = GameSaver.GetSerializableGameState(gameState);
 			var jsonString = JsonConvert.SerializeObject(serializableGameState, Formatting.Indented);
 
-			var saveFileDirectory = GameSaver.GetSaveFileDirectory();
+			var saveFileDirectory = SerializationHelpers.GetSaveFileDirectory();
 			Directory.CreateDirectory(saveFileDirectory);
 
-			var saveFilePath = Path.Combine(saveFileDirectory, $"{fileName}{GameSaver.SaveFileExtension}");
+			var saveFilePath = Path.Combine(saveFileDirectory, $"{fileName}{SerializationHelpers.SaveFileExtension}");
 			var fileExists = File.Exists(saveFilePath);
 
 			File.WriteAllText(saveFilePath, jsonString);
 			return fileExists;
 		}
 
-		public static SerializableGameState GetSerializableGameState(GameState gameState){
+		private static SerializableGameState GetSerializableGameState(GameState gameState){
 			var allLocations = GameSaver.TraverseAllLocations(gameState.CurrentLocation);
 			var serializableLocations = allLocations
 				.Select(l => new SerializableLocation
 				{
 					Name = l.Name,
-					Description = l.Description,
 					ConditionalDescription = l.ConditionalDescription,
 					Items = l.Items,
 					Connections = l.Connections.Select(c => new SerializableConnection
@@ -39,7 +36,7 @@ namespace TextAdventure.GameStateStuff.Serialization
 						ConditionalDescription = c.ConditionalDescription,
 						Destination = c.Destination.Name,
 						CharacteristicForEntry = c.CharacteristicForEntry
-					})
+					}).ToList()
 				});
 
 			return new SerializableGameState
@@ -49,12 +46,6 @@ namespace TextAdventure.GameStateStuff.Serialization
 				Protagonist = gameState.Protagonist,
 				GameIsOver = gameState.GameIsOver
 			};
-		}
-
-		public static string GetSaveFileDirectory()
-		{
-			var executableDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-			return Path.Combine(executableDirectory, "SaveFiles");
 		}
 
 		private static IEnumerable<Location> TraverseAllLocations(Location currentLocation)

@@ -20,8 +20,8 @@ namespace TextAdventure.Commands
 				return "Provide a name for the save file.";
 			}
 
-			var filePath = Path.Combine(GameSaver.GetSaveFileDirectory(),
-							   $"{this._saveFileName}{GameSaver.SaveFileExtension}");
+			var filePath = Path.Combine(SerializationHelpers.GetSaveFileDirectory(),
+							   $"{this._saveFileName}{SerializationHelpers.SaveFileExtension}");
 			var fileWasOverwritten = GameSaver.SaveGameState(gameState, this._saveFileName);
 
 			return $"Game saved to {filePath}{(fileWasOverwritten ? " (existing file was overwritten)" : "")}";

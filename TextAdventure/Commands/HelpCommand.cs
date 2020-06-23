@@ -15,6 +15,7 @@ namespace TextAdventure.Commands
 			""check"": check description of item in inventory
 			""take"": take item from current location
 			""enter"": enter new location using a connection from current location
+			""save"": save current game
 			""exitgame"": quit current game
 			".Unindent();
 		}

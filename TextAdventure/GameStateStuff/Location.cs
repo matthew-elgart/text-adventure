@@ -6,10 +6,9 @@ namespace TextAdventure.GameStateStuff
 	public class Location
 	{
 		public string Name { get; set; }
-		public string Description { get; set; }
 		public ConditionalDescription ConditionalDescription { get; set; }
 		public IList<Item> Items { get; set; } = new List<Item>();
-		public IEnumerable<Connection> Connections { get; set; } = new List<Connection>();
+		public IList<Connection> Connections { get; set; } = new List<Connection>();
 
 		public string GetFullLocationDescription(Protagonist protagonist)
 		{
