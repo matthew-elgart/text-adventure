@@ -55,6 +55,7 @@ namespace TextAdventure
 			- make updates to things like ItemsInspected in relevant commands
 			- extract stuff from Program.cs into a GamePlayer or something
 			- improve UX when loading files/using directories that don't exist
+			- resolve TODOs in InputParser.cs
 		- considerations:
 			- consider IDs instead of names
 			- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO

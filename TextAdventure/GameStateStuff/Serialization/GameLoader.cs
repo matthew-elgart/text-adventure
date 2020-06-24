@@ -17,7 +17,6 @@ namespace TextAdventure.GameStateStuff.Serialization
 			return GameLoader.GetGameState(serializedGameState);
 		}
 
-		// TODO: consider putting in GameLoader file
 		private static GameState GetGameState(SerializableGameState serializedGameState)
 		{
 			var allLocations = new List<Location>();
