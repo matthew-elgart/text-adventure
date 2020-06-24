@@ -18,17 +18,13 @@ namespace TextAdventure
 		* make "exitgame" a command"
 		* "go" command
 		* "help" command
-		- revisit triggers (and characteristics?)
+		* revisit triggers (and characteristics?)
 			* anything with a description gets it replaced with an ordered map and a method: GetDescription(Protagonist p)
 			* protagonist also tracks locations been and objects inspected
 			* protagonist has GetCharacteristics() method (name tbd) that combines all into enumerable of strings
 			* connections being enterable
-			- items being takeable
 		* change level to location
 		* reduce nesting on conditional/possible descriptions
-		- "Can't take that" or "No X to take here"?
-		- Consider abstract class for thing with conditional description
-		- extract stuff from Program.cs into a GamePlayer or something
 		* implement saving
 			* custom converter for destination of connection
 			* saver
@@ -49,12 +45,22 @@ namespace TextAdventure
 				* get file from fileName
 				* deserialize file contents
 				* transform to gamestate
-		- finish word wrapping update
-		- improve UX when loading files/using directories that don't exist
-		- make updates to things like ItemsInspected in relevant commands
-		- tests
-		- consider IDs instead of names
-		- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO
+		- trigger updates
+			- AND of multiple characteristics (OR can be done already with two triggers)
+			- NOT of a characteristic
+			- items being takeable
+			- connections/items being visible
+		- word wrapping update (some methods at the bottom of Program.cs)
+		- tech debt:
+			- make updates to things like ItemsInspected in relevant commands
+			- extract stuff from Program.cs into a GamePlayer or something
+			- improve UX when loading files/using directories that don't exist
+		- considerations:
+			- consider IDs instead of names
+			- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO
+			- Consider abstract class for thing with conditional description
+			- "Can't take that" or "No X to take here"?
+			- consider adding tests
 		*/
 		static void Main(string[] args)
 		{
