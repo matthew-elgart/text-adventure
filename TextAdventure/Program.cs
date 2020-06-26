@@ -52,7 +52,7 @@ namespace TextAdventure
 			* connections/items being visible
 		- word wrapping update (some methods at the bottom of Program.cs)
 		- tech debt:
-			- windows directory issue
+			* windows directory issue
 			- make updates to things like ItemsInspected in relevant commands
 			- extract stuff from Program.cs into a GamePlayer or something
 			- improve UX when loading files/using directories that don't exist
@@ -67,6 +67,7 @@ namespace TextAdventure
 				- similarly consider abstract class for things being visible. May be possible with the same thing
 			- "Can't take that" or "No X to take here"?
 			- consider adding tests
+			- look into Makefile for publishing releases bundled with save games
 		*/
 		static void Main(string[] args)
 		{
