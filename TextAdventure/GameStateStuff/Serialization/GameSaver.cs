@@ -35,6 +35,7 @@ namespace TextAdventure.GameStateStuff.Serialization
 						Name = c.Name,
 						ConditionalDescription = c.ConditionalDescription,
 						Destination = c.Destination.Name,
+						CharacteristicForVisibility = c.CharacteristicForVisibility,
 						CharacteristicForEntry = c.CharacteristicForEntry
 					}).ToList()
 				});

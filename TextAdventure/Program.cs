@@ -45,21 +45,26 @@ namespace TextAdventure
 				* get file from fileName
 				* deserialize file contents
 				* transform to gamestate
-		- trigger updates
-			- AND of multiple characteristics (OR can be done already with two triggers)
-			- NOT of a characteristic
-			- items being takeable
-			- connections/items being visible
+		* trigger updates
+			* AND of multiple characteristics (OR can be done already with two triggers)
+			* NOT of a characteristic
+			* items being takeable
+			* connections/items being visible
 		- word wrapping update (some methods at the bottom of Program.cs)
 		- tech debt:
+			- windows directory issue
 			- make updates to things like ItemsInspected in relevant commands
 			- extract stuff from Program.cs into a GamePlayer or something
 			- improve UX when loading files/using directories that don't exist
 			- resolve TODOs in InputParser.cs
+			- it's annoying that serializable classes need to be updated when the base class is updated
+				- and also that the code in the saver/loader needs to be updated as well
+			- there's similarly a lot of duplication of logic checking for things being visible/takeable before doing actions
 		- considerations:
 			- consider IDs instead of names
 			- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO
 			- Consider abstract class for thing with conditional description
+				- similarly consider abstract class for things being visible. May be possible with the same thing
 			- "Can't take that" or "No X to take here"?
 			- consider adding tests
 		*/

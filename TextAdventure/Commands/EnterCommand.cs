@@ -20,8 +20,9 @@ namespace TextAdventure.Commands
 			}
 
 			var connection = gameState.CurrentLocation.Connections
-				.SingleOrDefault(c => c.Name.Equals(this._connectionToEnter, StringComparison.OrdinalIgnoreCase));
-			if (connection != null && connection.IsEnterable(gameState.Protagonist))
+				.SingleOrDefault(c => c.IsEnterable(gameState.Protagonist)
+					&& c.Name.Equals(this._connectionToEnter, StringComparison.OrdinalIgnoreCase));
+			if (connection != null)
 			{
 				gameState.CurrentLocation = connection.Destination;
 				return connection.Destination.GetFullLocationDescription(gameState.Protagonist);

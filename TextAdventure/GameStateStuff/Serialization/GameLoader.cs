@@ -41,6 +41,7 @@ namespace TextAdventure.GameStateStuff.Serialization
 						Name = serializableConnection.Name,
 						ConditionalDescription = serializableConnection.ConditionalDescription,
 						Destination = null,
+						CharacteristicForVisibility = serializableConnection.CharacteristicForVisibility,
 						CharacteristicForEntry = serializableConnection.CharacteristicForEntry
 					};
 

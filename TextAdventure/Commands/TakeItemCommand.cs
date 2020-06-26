@@ -21,15 +21,17 @@ namespace TextAdventure.Commands
 			}
 
 			var currentLocation = gameState.CurrentLocation;
+			var protagonist = gameState.Protagonist;
 			var itemInLocation = currentLocation.Items
-				.SingleOrDefault(i => i.Name.Equals(this._itemToTake, StringComparison.OrdinalIgnoreCase));
+				.SingleOrDefault(i => i.IsTakeable(protagonist)
+					&& i.Name.Equals(this._itemToTake, StringComparison.OrdinalIgnoreCase));
 			if (itemInLocation == null) {
-				return $"There is no [{this._itemToTake}] to take here.";
+				return $"Can't take that.";
 			}
 
 			currentLocation.Items.Remove(itemInLocation);
-			gameState.Protagonist.Items.Add(itemInLocation);
-			return $"Took the [{itemInLocation.Name}].";
+			protagonist.Items.Add(itemInLocation);
+			return $"[{itemInLocation.Name}] added to inventory.";
 		}
 	}
 }

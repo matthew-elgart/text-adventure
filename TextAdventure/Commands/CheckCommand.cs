@@ -21,8 +21,10 @@ namespace TextAdventure.Commands
 				return "You need to specify what to check.";
 			}
 
-			var item = gameState.Protagonist.Items
-				.SingleOrDefault(i => i.Name.Equals(this._itemToCheck, StringComparison.OrdinalIgnoreCase));
+			var protagonist = gameState.Protagonist;
+			var item = protagonist.Items
+				.SingleOrDefault(i => i.IsVisible(protagonist)
+					&& i.Name.Equals(this._itemToCheck, StringComparison.OrdinalIgnoreCase));
 			if (item != null){
 				return item.GetDescription(gameState.Protagonist);
 			}

@@ -13,8 +13,12 @@ namespace TextAdventure.GameStateStuff
 		public string GetFullLocationDescription(Protagonist protagonist)
 		{
 			var levelDescription = this.GetDescription(protagonist);
-			var itemNames = this.Items.Select(i => $"There is a [{i.Name}] here.");
-			var connectionNames = this.Connections.Select(c => $"There is a [{c.Name}] here.");
+			var itemNames = this.Items
+				.Where(i => i.IsVisible(protagonist))
+				.Select(i => $"There is a [{i.Name}] here.");
+			var connectionNames = this.Connections
+				.Where(c => c.IsVisible(protagonist))
+				.Select(c => $"There is a [{c.Name}] here.");
 
 			var result = levelDescription;
 

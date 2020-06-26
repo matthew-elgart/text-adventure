@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace TextAdventure.GameStateStuff
@@ -14,8 +15,8 @@ namespace TextAdventure.GameStateStuff
 		{
 			foreach (var entry in descriptions)
 			{
-				var typedEntry = (DictionaryEntry) entry;
-				this.Add((string) typedEntry.Key, (string) typedEntry.Value);
+				var typedEntry = (DictionaryEntry)entry;
+				this.Add((string)typedEntry.Key, (string)typedEntry.Value);
 			}
 		}
 
@@ -32,7 +33,7 @@ namespace TextAdventure.GameStateStuff
 			foreach (var key in this.Keys)
 			{
 				var stringKey = (string)key;
-				if (protagonist.GetCharacteristics().Any(c => string.Equals(c, stringKey, StringComparison.OrdinalIgnoreCase)))
+				if (TriggerChecker.CharacteristicsMatchTrigger(stringKey, protagonist.GetCharacteristics()))
 				{
 					return (string)this[key];
 				}
