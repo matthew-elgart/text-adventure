@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ "${PWD##*/}" != "build-scripts" ]
+  then
+    echo "ERROR: run this script from the build-scripts directory."
+    echo "Exiting."
+    exit 1
+fi
+
+if [ $# -eq 0 ]
+  then
+    echo "ERROR: no arguments supplied for runtime identifier. Use either 'win-x64' or 'osx-x64'."
+    echo "Exiting."
+    exit 1
+fi
+
+echo "Cleaning existing output files: 'publish/$1' and 'publish/$1.zip'..."
+rm -rf ../publish/$1
+rm ../publish/$1.zip
+echo "Done cleaning."
+
+echo "Publishing to folder 'publish/$1'..."
+dotnet publish ../TextAdventure.csproj -c Release -r $1 -o ../publish/$1 /p:PublishSingleFile=true /p:PublishTrimmed=true
+echo "Done publishing."
+
+echo "Copying save files to 'publish/$1/SaveFiles'..."
+cp -r ../SaveFiles ../publish/$1/SaveFiles
+echo "Done copying save files."
+
+echo "Compressing save directory 'publish/$1"
+zip -r ../publish/$1.zip ../publish/$1
+echo "Done!"

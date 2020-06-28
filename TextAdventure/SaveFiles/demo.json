@@ -1,0 +1,163 @@
+{
+  "Locations": [
+    {
+      "Name": "Start room",
+      "ConditionalDescription": {
+		"visited-location Secondary room": "The room you woke up in. It is almost completely nondescript. The walls, ceiling, and floor are all blank.",
+        "always-true": "You have woken up in a room you've never been in before. Apart from a door in front of you, the room is almost completely nondescript. The walls, ceiling, and floor are all blank: the perfect room to start a game demo. As a reminder, you can type \"help\" for a list of commands you can use."
+      },
+      "Items": [
+        {
+          "Name": "Conspicuous Note",
+          "ConditionalDescription": {
+			"owns-item Conspicuous Note": "A sheet of paper you found lying neatly at the center of the room you woke up in. You're quite sure it wasn't there when you woke up in the room. It must be an example of the game engine's trigger system! Something that you did triggered the paper to be here.\n\nThe page shows a diagram describing a hidden door in the wall near the corner. If you use the \"location\" command, you should be able to notice a new connection out of the room.",
+			"always-true": "A sheet of paper lying neatly at the center of the room you woke up in. You're quite sure it wasn't there when you woke up in the room. It must be an example of the game engine's trigger system! Something that you did triggered the paper to be here.\n\nThe page shows a diagram describing a hidden door in the wall near the corner. If you use the \"location\" command, you should be able to notice a new connection out of the room."
+		  },
+		  "CharacteristicForVisibility": "visited-location Secondary room"
+        }
+      ],
+      "Connections": [
+        {
+          "Name": "Door",
+          "ConditionalDescription": {
+			"visited-location Secondary room": "The door has somehow locked behind you, and it won't open anymore. No matter how you hard you push, it doesn't budge. Damn trigger system.",
+            "always-true": "A simple door that matches the grey color of the room. Presumably you will advance the demo by entering it."
+          },
+          "Destination": "Secondary room",
+          "CharacteristicForEntry": "not visited-location Secondary room"
+		},
+		{
+		  "Name": "Concealed Hatch",
+		  "ConditionalDescription": {
+			"always-true": "A hatch that you hadn't noticed until it was pointed out by the [Conspicuous Note]. It leads out of the room."
+		  },
+		  "Destination": "OR-Door room",
+		  "CharacteristicForVisibility": "inspected-item Conspicuous Note"
+		}
+      ]
+    },
+    {
+      "Name": "Secondary room",
+      "ConditionalDescription": {
+        "always-true": "This room is almost identical to the one you woke up in. There's nothing here! What kind of demo is this, only two rooms? Are you just supposed to go back and forth between them until you quit from boredom?"
+      },
+      "Items": [],
+      "Connections": [
+        {
+          "Name": "Door back",
+          "ConditionalDescription": {
+            "always-true": "The door back to the room you woke up in. As you look at it, you realize that you really did prefer being in that first room. It had a much better view of... utter greyness."
+          },
+          "Destination": "Start room",
+          "CharacteristicForEntry": "always-true"
+        }
+      ]
+    },
+    {
+      "Name": "OR-Door room",
+      "ConditionalDescription": {
+        "always-true": "The hatch dropped you into a room which - thankfully - has a bit more in the way of decoration. There are two altars in the room, one to either side. One is glowing red, the other blue.\n\nAt the far end of the room is an imposing-looking door, marked with a strange symbol."
+      },
+      "Items": [
+		{
+		  "Name": "Blue Orb",
+		  "ConditionalDescription": {
+			"not inspected-connection OR-Door": "(This will work best if you inspect the door first. Come on back after you do that.)",
+			"owns-item Blue Orb": "As you take a closer look at the orb, you think you can hear a voice saying... \"blood gulch?\" You don't know what that means, but it sounds intimidating.",
+			"always-true": "The source of the blue glow of the altar on the left is this orb. As you take a closer look at it, you think you can hear a voice saying... \"blood gulch?\" You don't know what that means, but it sounds intimidating."
+		  },
+		  "CharacteristicForTaking": "inspected-connection OR-Door"
+		},
+		{
+		  "Name": "Red Orb",
+		  "ConditionalDescription": {
+			"not inspected-connection OR-Door": "(This will work best if you inspect the door first. Come on back after you do that.)",
+			"owns-item Red Orb": "As you take a closer look at the orb, you think you can hear a voice saying something about a mountain lion - well, specifically a puma.",
+			"always-true": "The source of the red glow of the altar on the right is this orb. As you take a closer look at it, you think you can hear a voice saying something about a mountain lion - well, specifically a puma."
+		  },
+		  "CharacteristicForTaking": "inspected-connection OR-Door"
+		}
+	  ],
+      "Connections": [
+		{
+		  "Name": "OR-Door",
+		  "ConditionalDescription": {
+			"owns-item Red Orb": "With the orb in hand, the symbol on the door glows red when you approach. You hear a faint \"click\" sound as the door unlocks.",
+			"always-true": "A heavy door marked with a strange symbol. It looks like two vertical lines side-by-side. Could this be... the fabled \"OR-Door\" of legend? You recall the famous scriptures:\n\n\"When you see the OR-Door, you can use either the red orb OR the blue orb to open it. Duh.\""
+		  },
+		  "CharacteristicForEntry": "owns-item Red Orb",
+		  "CharacteristicForVisibility": "not owns-item Blue Orb",
+		  "Destination": "Exit room"
+		},
+		{
+		  "Name": "OR-Door",
+		  "ConditionalDescription": {
+			"owns-item Red Orb and owns-item Blue Orb": "Wow, both orbs. You know the point of the OR-Door is that you only need one, right? Tryhard.\n\nAnyway, with both orbs in hand, the symbol on the door glows purple when you approach. You hear a faint \"click\" sound as the door unlocks.",
+			"owns-item Blue Orb": "With the orb in hand, the symbol on the door glows blue when you approach. You hear a faint \"click\" sound as the door unlocks."
+		  },
+		  "CharacteristicForEntry": "owns-item Blue Orb",
+		  "CharacteristicForVisibility": "owns-item Blue Orb",
+		  "Destination": "AND-Door room"
+		}
+	  ]
+	},
+    {
+      "Name": "AND-Door room",
+      "ConditionalDescription": {
+        "always-true": "Your gaming-demo-senses tell you that this is the final room. It's pretty similar in layout to the last room - altar to the left, check. Altar to the right, check. Door on the far side with a ridiculous-looking symbol? Big ol' check.\n\nAdmittedly, the altars here glow orange and green instead of red and blue. So there's that."
+      },
+      "Items": [
+		{
+		  "Name": "Green Orb",
+		  "ConditionalDescription": {
+			"not inspected-connection AND-Door": "(Same deal as before. Door first.)",
+			"owns-item Green Orb": "You stare at the orb, bracing yourself for thinly-veiled mid-2000s era references. But apart from vague thoughts of salads entering your head, nothing. This narrator is a fickle one.",
+			"always-true": "You approach the green orb, bracing yourself for thinly-veiled mid-2000s era references. But apart from vague thoughts of salads entering your head, nothing. This narrator is a fickle one."
+		  },
+		  "CharacteristicForTaking": "inspected-connection AND-Door"
+		},
+		{
+		  "Name": "Orange Orb",
+		  "ConditionalDescription": {
+			"not inspected-connection AND-Door": "(Same deal as before. Door first.)",
+			"owns-item Orange Orb": "You stare at the orb, and the Fanta theme song enters your head unbidden. You quickly stuff it back in your inventory, but it's too late.",
+			"always-true": "You approach the orange orb, and the Fanta theme song enters your head unbidden. You quickly look away, but it's too late."
+		  },
+		  "CharacteristicForTaking": "inspected-connection AND-Door"
+		}
+	  ],
+      "Connections": [
+		{
+		  "Name": "AND-Door",
+		  "ConditionalDescription": {
+			"owns-item Orange Orb and owns-item Green Orb": "The two ampersands glow green and orange as you approach. The door \"clicks\" unlocked, and you hear a faint voice saying \"Go Canes\" as it swings open.",
+			"owns-item Green Orb": "C'mon now, don't be difficult. The door has *two giant ampersands* on it. Get both orbs, please.",
+			"owns-item Orange Orb": "C'mon now, don't be difficult. The door has *two giant ampersands* on it. Get both orbs, please.",
+			"always-true": "A heavy door marked with a strange symbol. It looks like two... uh... ampersands.\n\nIt's pretty transparent what needs to happen here."
+		  },
+		  "CharacteristicForEntry": "owns-item Orange Orb and owns-item Green Orb",
+		  "Destination": "Exit room"
+		}
+	  ]
+	},
+    {
+      "Name": "Exit room",
+      "ConditionalDescription": {
+        "always-true": "You made it out!"
+      },
+      "Items": [],
+      "Connections": []
+	}
+  ],
+  "CurrentLocationName": "Start room",
+  "Protagonist": {
+    "Items": [],
+    "ItemsInspected": [],
+    "ConnectionsInspected": [],
+    "LocationsVisited": [],
+    "ExtraCharacteristics": [
+      "always-true"
+    ]
+  },
+  "GameIsOver": false
+}
