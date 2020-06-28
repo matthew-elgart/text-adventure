@@ -50,10 +50,17 @@ namespace TextAdventure
 			* NOT of a characteristic
 			* items being takeable
 			* connections/items being visible
+		- OR for characteristics
 		- word wrapping update (some methods at the bottom of Program.cs)
+		- customizable entry text for connections
+			- leave current as default?
+			- conditional with triggers?
+		- tab completion
+		- up/down for old commands
 		- tech debt:
 			* windows directory issue
-			- make updates to things like ItemsInspected in relevant commands
+			* make updates to things like ItemsInspected in relevant commands
+			- serializable protagonist
 			- extract stuff from Program.cs into a GamePlayer or something
 			- improve UX when loading files/using directories that don't exist
 			- resolve TODOs in InputParser.cs
@@ -64,15 +71,14 @@ namespace TextAdventure
 			- consider IDs instead of names
 			- consider a more typesafe ordered dictionary: https://www.codeproject.com/Articles/18615/OrderedDictionary-T-A-generic-implementation-of-IO
 			- Consider abstract class for thing with conditional description
-				- similarly consider abstract class for things being visible. May be possible with the same thing
-			- "Can't take that" or "No X to take here"?
+				- similarly consider abstract class for conditionally visible stuff. May be possible with the same thing
+			* "Can't take that" or "No X to take here"?
 			- consider adding tests
-			- look into Makefile for publishing releases bundled with save games
+			- look into Makefile or something else for automating published releases bundled with save games
 		*/
 		static void Main(string[] args)
 		{
-			const string clearScreen = "\u001b[2J" + "\u001b[H";
-			Console.WriteLine(clearScreen);
+			Console.Clear();
 			Console.WriteLine("Welcome to the game.");
 			Console.WriteLine("Please enter the name of the game file you want to load, or enter \"list games\" to see all available files to load.");
 			var fileName = Program.ReadInputFromUser();
@@ -112,15 +118,8 @@ namespace TextAdventure
 			Console.WriteLine("-----");
 			Console.WriteLine();
 
-			Console.WriteLine(gameState.CurrentLocation.GetFullLocationDescription(gameState.Protagonist));
-
-			while (!gameState.GameIsOver)
-			{
-				var input = Program.ReadInputFromUser();
-				var command = InputParser.ParseInput(input);
-				var stringToPrint = command.ExecuteCommand(gameState);
-				Console.WriteLine(stringToPrint);
-			}
+			var player = new GamePlayer(gameState);
+			player.Play();
 		}
 
 		public static string ReadInputFromUser()
