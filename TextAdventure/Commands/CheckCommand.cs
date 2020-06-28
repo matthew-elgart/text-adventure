@@ -26,6 +26,7 @@ namespace TextAdventure.Commands
 				.SingleOrDefault(i => i.IsVisible(protagonist)
 					&& i.Name.Equals(this._itemToCheck, StringComparison.OrdinalIgnoreCase));
 			if (item != null){
+				protagonist.ItemsInspected.Add(item);
 				return item.GetDescription(gameState.Protagonist);
 			}
 

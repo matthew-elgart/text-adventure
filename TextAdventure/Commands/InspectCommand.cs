@@ -27,6 +27,7 @@ namespace TextAdventure.Commands
 					&& i.Name.Equals(this._objectToInspect, StringComparison.OrdinalIgnoreCase));
 			if (item != null)
 			{
+				protagonist.ItemsInspected.Add(item);
 				return item.GetDescription(gameState.Protagonist);
 			}
 
@@ -35,6 +36,7 @@ namespace TextAdventure.Commands
 					&& c.Name.Equals(this._objectToInspect, StringComparison.OrdinalIgnoreCase));
 			if (connection != null)
 			{
+				protagonist.ConnectionsInspected.Add(connection);
 				return connection.GetDescription(gameState.Protagonist);
 			}
 

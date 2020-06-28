@@ -25,7 +25,11 @@ namespace TextAdventure.Commands
 			if (connection != null)
 			{
 				gameState.CurrentLocation = connection.Destination;
-				return connection.Destination.GetFullLocationDescription(gameState.Protagonist);
+				gameState.Protagonist.LocationsVisited.Add(connection.Destination);
+
+				var result = $"Entered the [{connection.Name}].\n\n-----\n\n";
+				result += connection.Destination.GetFullLocationDescription(gameState.Protagonist);
+				return result;
 			}
 
 			return $"Can't go there.";
