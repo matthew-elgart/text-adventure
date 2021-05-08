@@ -125,15 +125,17 @@ namespace TextAdventure
 		public static string ReadInputFromUser()
 		{
 			Console.WriteLine();
-			Console.Write(">");
+			Console.Write("> ");
 			var result = Console.ReadLine();
 			Console.WriteLine();
 			return result;
 		}
 
-		public static void WriteWrapped(string text){
+		public static void WriteWrapped(string text)
+		{
 			const int maxLineLength = 80;
-			foreach (var line in Program.WordWrap(text, maxLineLength)){
+			foreach (var line in Program.WordWrap(text, maxLineLength))
+			{
 				Console.WriteLine("{0, 62} {1, 80}", "", line);
 			}
 		}
