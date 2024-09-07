@@ -87,7 +87,7 @@
 		  },
 		  "CharacteristicForEntry": "owns-item Red Orb",
 		  "CharacteristicForVisibility": "not owns-item Blue Orb",
-		  "Destination": "Exit room"
+		  "Destination": "AND-Door room"
 		},
 		{
 		  "Name": "OR-Door",
